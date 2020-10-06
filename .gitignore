@@ -15,5 +15,3 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 .idea/
-src/Controller/HomeController.php
-templates/home/
