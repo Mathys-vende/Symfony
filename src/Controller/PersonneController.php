@@ -15,7 +15,7 @@ class PersonneController extends AbstractController
     /**
      * @Route("/soiree/{idSoiree}", name="Soiree")
      */
-    public function index($idSoiree, Request $request)
+    public function index(Soiree $idSoiree, Request $request)
     {
         $repo=$this->getDoctrine()->getRepository(Soiree::class);
         $soiree=$repo->find($idSoiree);
@@ -28,6 +28,7 @@ class PersonneController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $personne->setIdSoiree($idSoiree);
             $em->persist($personne);
             $em->flush();
         }

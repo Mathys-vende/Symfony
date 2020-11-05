@@ -14,13 +14,12 @@ class AjoutPersonneType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    var_dump($options['idSoiree']);
+
         $builder
             ->add('Nom')
             ->add('Prenom')
             ->add('montant')
             ->add('Part')
-            ->add('idSoiree')
             ->add("ok", SubmitType::class, ["label"=>"Enregistrer"])
         ;
     }
@@ -28,7 +27,7 @@ class AjoutPersonneType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-                'idSoiree' => -1, // ne pas oublier de mettre une valeur par défaut
+            'idSoiree' => -1, // ne pas oublier de mettre une valeur par défaut
             'data_class' => Projet::class,
         ]);
     }
