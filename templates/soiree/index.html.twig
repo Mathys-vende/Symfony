@@ -2,7 +2,35 @@
 
 
 {% block body %}
-  <h1>Le nom de la soirée est {{ soiree.nom }}</h1>
-  {{ form(formulaire) }}
+
+
+    <h1>Ajouter une soirée</h1>
+
+    <a class="btn btn-primary" href="{{ path("ajouter_soiree") }}">Création Soirée</a>
+
+    <h1>Toutes les soirées</h1>
+
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th></th>
+            <th>Détail de la soirée</th>
+        </tr>
+
+        {% for s in soiree %}
+            <tr>
+                <td>
+                    {{ s.Nom }}
+                </td>
+                <td></td>
+                <td>
+                    <a class="btn btn-sucess" href="{{ path('ajouter_personne', {"idSoiree":s.id}) }}" >Click On Me</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+
 
 {% endblock %}

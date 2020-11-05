@@ -13,12 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class PersonneController extends AbstractController
 {
     /**
-     * @Route("/soiree/{idSoiree}", name="Soiree")
+     * @Route("/personne/ajouter/{idSoiree}", name="ajouter_personne")
      */
     public function index(Soiree $idSoiree, Request $request)
     {
-        $repo=$this->getDoctrine()->getRepository(Soiree::class);
-        $soiree=$repo->find($idSoiree);
+        $repo = $this->getDoctrine()->getRepository(Soiree::class);
+        $soiree = $repo->find($idSoiree);
 
 
         $personne = new Projet();
@@ -31,13 +31,13 @@ class PersonneController extends AbstractController
             $personne->setIdSoiree($idSoiree);
             $em->persist($personne);
             $em->flush();
+
+            //return $this->redirectToRoute("", ["id"=>$chaton->getCategorie()->getId()]);
         }
-
-
 
         $personne=$soiree->getIdProjet();
 
-        return $this->render('soiree/index.html.twig', [
+        return $this->render('personne/ajouter.html.twig', [
             'soiree'=>$soiree,
             'personne'=>$personne,
             "formulaire" => $form->createView()

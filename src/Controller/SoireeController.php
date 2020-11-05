@@ -13,18 +13,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class SoireeController extends AbstractController
 {
     /**
-     * @Route("/Soiree", name="HomeSoiree")
+     * @Route("/Soiree", name="home_soiree")
      */
-    public function index(): Response
+    public function index()
     {
+
+        $repository = $this->getDoctrine()->getRepository(Soiree::class);
+
+        //je lis la BDD
+        $soiree=$repository->findAll();
+
         return $this->render('soiree/index.html.twig', [
-            'controller_name' => 'SoireeController',
+            'soiree' => $soiree,
         ]);
     }
 
-
     /**
-     * @Route("/Soiree/ajouter",name="AjouterSoiree")
+     * @Route("/Soiree/ajouter",name="ajouter_soiree")
      */
     public function AjouterSoiree(Request $request)
     {
@@ -36,9 +41,9 @@ class SoireeController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($soiree);
             $em->flush();
-            return $this->redirectToRoute("Soiree", ["idSoiree"=>$soiree->getId()]);
+            return $this->redirectToRoute("home_soiree", ["idSoiree"=>$soiree->getId()]);
         }
-        return $this->render("soiree/AjouterSoiree.html.twig", [
+        return $this->render("soiree/ajouter.html.twig", [
             "formulaire" => $form->createView(),
 
         ]);
