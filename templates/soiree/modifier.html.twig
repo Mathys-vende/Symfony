@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Modification de la soirée {{soiree.Nom}}</h1>
+    {{ form(formulaire) }}
+
+    <a class="btn btn-danger" href="{{ path("home_soiree") }}"> retour à la liste des soirées</a>
+
+{% endblock %}

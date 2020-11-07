@@ -10,6 +10,8 @@
             <th>Prenom</th>
             <th>Montant</th>
             <th>Part</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
         </tr>
 
         {% for p in personne %}
@@ -18,12 +20,14 @@
                 <td>{{ p.Prenom }}</td>
                 <td>{{ p.Montant }}</td>
                 <td>{{ p.Part }}</td>
+                <td><a class="btn btn-warning" href="{{ path('modifier_personne', {"id":p.id, "idSoiree":soiree.id}) }}" >Modification</a></td>
+                <td><a class="btn btn-danger" href="{{ path('supprimer_personne', {"id":p.id, "idSoiree":soiree.id}) }}" >Supprimer</a></td>
             </tr>
         {% endfor %}
     </table>
 
     {{ form(formulaire) }}
 
-    <a class="btn btn-danger" href="{{ path("home_soiree") }}"> retour à la liste des soirées</a>
+    <a class="btn btn-danger" href="{{ path("ajouter_personne", {"idSoiree":soiree.id}) }}"> retour aux détails de la soirée {{ soiree.Nom }}</a>
 
 {% endblock %}
