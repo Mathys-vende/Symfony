@@ -27,6 +27,7 @@ class PersonneType extends AbstractType
             ->add('Part', IntegerType::class, array('data' => 1))
             ->add("ok", SubmitType::class, ["label"=>"Enregistrer"])
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -21,18 +21,23 @@ class PersonneController extends AbstractController
         $soiree = $repo->find($idSoiree);
 
 
+
+
         $personne = new Projet();
-        $form = $this->createForm(PersonneType::class, $personne, [
-        'idSoiree' => $idSoiree // valeur a envoyer
-        ]);
+        $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $personne->setIdSoiree($idSoiree);
             $em->persist($personne);
             $em->flush();
+            
+            unset($personne);
+            unset($form);
+            $personne = new Projet();
+            $form = $this->createForm(PersonneType::class, $personne);
 
-            //return $this->redirectToRoute("", ["id"=>$chaton->getCategorie()->getId()]);
         }
 
         $personne=$soiree->getIdProjet();
