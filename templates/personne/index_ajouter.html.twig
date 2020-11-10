@@ -25,9 +25,21 @@
             </tr>
         {% endfor %}
     </table>
+    <table class="table table-danger">
+        <tr>
+            <th>Total des montants</th>
+            <th>Total des parts</th>
+            <th>Le prix d'une part</th>
+        </tr>
+        <tr>
+            <td>{{ total_montant }}</td>
+            <td>{{ total_part }}</td>
+            <td>{{ une_part }}</td>
+        </tr>
+    </table>
 
     {{ form(formulaire) }}
 
-    <a class="btn btn-danger" href="{{ path("ajouter_personne", {"idSoiree":soiree.id}) }}"> retour aux détails de la soirée {{ soiree.Nom }}</a>
+    <a class="btn btn-danger" href="{{ path("home_soiree") }}"> retour à la liste des soirées</a>
 
 {% endblock %}

@@ -20,12 +20,18 @@ class SoireeController extends AbstractController
     {
 
         $repository = $this->getDoctrine()->getRepository(Soiree::class);
-
         //je lis la BDD
         $soiree=$repository->findAll();
 
+        $repo = $this->getDoctrine()->getRepository(Soiree::class);
+        $count = $repo->createQueryBuilder('test')
+            ->select('count(test.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
         return $this->render('soiree/index.html.twig', [
             'soiree' => $soiree,
+            "count"=> $count
         ]);
     }
 
@@ -59,6 +65,7 @@ class SoireeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Soiree::class);
         $soiree=$repository->find($id);
 
+
         //créer le formulaire
         $form=$this->createForm(SoireeType::class, $soiree);
 
@@ -81,7 +88,7 @@ class SoireeController extends AbstractController
 
         return $this->render('soiree/modifier.html.twig', [
             'formulaire' => $form->createView(),
-            "soiree"=>$soiree
+            "soiree"=>$soiree,
         ]);
     }
 

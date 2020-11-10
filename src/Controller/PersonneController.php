@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Projet;
 use App\Entity\Soiree;
+use App\Form\PersonneSupprimerType;
 use App\Form\PersonneType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +21,6 @@ class PersonneController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Soiree::class);
         $soiree = $repo->find($idSoiree);
 
-
-
-
         $personne = new Projet();
         $form = $this->createForm(PersonneType::class, $personne);
         $form->handleRequest($request);
@@ -32,19 +30,38 @@ class PersonneController extends AbstractController
             $personne->setIdSoiree($idSoiree);
             $em->persist($personne);
             $em->flush();
-            
             unset($personne);
+            unset($repo);
             unset($form);
             $personne = new Projet();
             $form = $this->createForm(PersonneType::class, $personne);
-
         }
 
         $personne=$soiree->getIdProjet();
 
+        $repo = $this->getDoctrine()->getRepository(Projet::class);
+        $total_montant = $repo->createQueryBuilder('test')
+            ->select('SUM(test.montant) as total_montant')
+            ->where('test.idSoiree = :id')
+            ->setParameter('id', $idSoiree)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $total_part = $repo->createQueryBuilder('test')
+            ->select('SUM(test.Part) as total_part')
+            ->where('test.idSoiree = :id')
+            ->setParameter('id', $idSoiree)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $une_part = $total_montant - $total_part;
+
         return $this->render('personne/index_ajouter.html.twig', [
             'soiree'=>$soiree,
             'personne'=>$personne,
+            'total_montant' => $total_montant,
+            'total_part' => $total_part,
+            'une_part' => $une_part,
             "formulaire" => $form->createView()
         ]);
     }
@@ -60,6 +77,8 @@ class PersonneController extends AbstractController
 
         $repo = $this->getDoctrine()->getRepository(Projet::class);
         $personne = $repo->find($id);
+
+
 
         $form = $this->createForm(PersonneType::class, $personne, [
             'idSoiree' => $idSoiree // valeur a envoyer
@@ -101,7 +120,7 @@ class PersonneController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Projet::class);
         $personne = $repo->find($id);
 
-        $form = $this->createForm(PersonneType::class, $personne, [
+        $form = $this->createForm(PersonneSupprimerType::class, $personne, [
             'idSoiree' => $idSoiree // valeur a envoyer
         ]);
         //gérer le retour du POST
