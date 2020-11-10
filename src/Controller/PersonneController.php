@@ -54,7 +54,12 @@ class PersonneController extends AbstractController
             ->getQuery()
             ->getSingleScalarResult();
 
-        $une_part = $total_montant - $total_part;
+        if ( $total_part != 0){
+            $une_part = round($total_montant / $total_part, 2);
+        }else{
+            $une_part = '';
+        }
+
 
         return $this->render('personne/index_ajouter.html.twig', [
             'soiree'=>$soiree,

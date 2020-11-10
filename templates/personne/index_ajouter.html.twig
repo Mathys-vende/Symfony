@@ -10,6 +10,8 @@
             <th>Prenom</th>
             <th>Montant</th>
             <th>Part</th>
+            <th>Prix à payer</th>
+            <th>Prix à recevoir</th>
             <th>Modifier</th>
             <th>Supprimer</th>
         </tr>
@@ -20,6 +22,13 @@
                 <td>{{ p.Prenom }}</td>
                 <td>{{ p.Montant }}</td>
                 <td>{{ p.Part }}</td>
+                {% if p.montant >= une_part %}
+                    <td></td>
+                    <td>{{ p.montant - ( une_part * p.Part) }}</td>
+                {% else  %}
+                    <td>{{ ( une_part * p.Part) - p.montant }}</td>
+                    <td></td>
+                {% endif %}
                 <td><a class="btn btn-warning" href="{{ path('modifier_personne', {"id":p.id, "idSoiree":soiree.id}) }}" >Modification</a></td>
                 <td><a class="btn btn-danger" href="{{ path('supprimer_personne', {"id":p.id, "idSoiree":soiree.id}) }}" >Supprimer</a></td>
             </tr>
