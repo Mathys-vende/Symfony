@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Liste des personnes{% endblock %}
 
 {% block body %}
     <h1>Ajouter une personne à la soirée : {{ soiree.Nom }}</h1>
@@ -20,13 +21,13 @@
             <tr>
                 <td>{{ p.Nom }}</td>
                 <td>{{ p.Prenom }}</td>
-                <td>{{ p.Montant }}</td>
+                <td>{{ p.Montant }} €</td>
                 <td>{{ p.Part }}</td>
                 {% if p.montant >= une_part %}
                     <td></td>
-                    <td>{{ p.montant - ( une_part * p.Part) }}</td>
+                    <td>{{ p.montant - ( une_part * p.Part) }} €</td>
                 {% else  %}
-                    <td>{{ ( une_part * p.Part) - p.montant }}</td>
+                    <td>{{ ( une_part * p.Part) - p.montant }} €</td>
                     <td></td>
                 {% endif %}
                 <td><a class="btn btn-warning" href="{{ path('modifier_personne', {"id":p.id, "idSoiree":soiree.id}) }}" >Modification</a></td>
@@ -41,9 +42,9 @@
             <th>Le prix d'une part</th>
         </tr>
         <tr>
-            <td>{{ total_montant }}</td>
+            <td>{{ total_montant }} €</td>
             <td>{{ total_part }}</td>
-            <td>{{ une_part }}</td>
+            <td>{{ une_part }} €</td>
         </tr>
     </table>
 

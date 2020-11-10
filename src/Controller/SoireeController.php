@@ -23,15 +23,8 @@ class SoireeController extends AbstractController
         //je lis la BDD
         $soiree=$repository->findAll();
 
-        $repo = $this->getDoctrine()->getRepository(Soiree::class);
-        $count = $repo->createQueryBuilder('test')
-            ->select('count(test.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-
         return $this->render('soiree/index.html.twig', [
             'soiree' => $soiree,
-            "count"=> $count
         ]);
     }
 
