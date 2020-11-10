@@ -19,7 +19,6 @@ class PersonneSupprimerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add("ok", SubmitType::class, ["label"=>"Supprimer"])
         ;
