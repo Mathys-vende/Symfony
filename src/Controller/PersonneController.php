@@ -61,6 +61,15 @@ class PersonneController extends AbstractController
         }
 
 
+        foreach ($personne as $p){
+            if ($p->getMontant() > $une_part){
+                $p->setArecevoir($p->getMontant() - ( $une_part * $p->getPart()));
+            }elseif ($p->getMontant() < $une_part){
+                $p->setApayer(( $une_part * $p->getPart() - $p->getMontant()));
+            }
+        }
+
+
         return $this->render('personne/index_ajouter.html.twig', [
             'soiree'=>$soiree,
             'personne'=>$personne,

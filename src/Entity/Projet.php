@@ -43,6 +43,16 @@ class Projet
      */
     private $idSoiree;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $Apayer;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $Arecevoir;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +114,30 @@ class Projet
     public function setIdSoiree(?Soiree $idSoiree): self
     {
         $this->idSoiree = $idSoiree;
+
+        return $this;
+    }
+
+    public function getApayer(): ?float
+    {
+        return $this->Apayer;
+    }
+
+    public function setApayer(?float $Apayer): self
+    {
+        $this->Apayer = $Apayer;
+
+        return $this;
+    }
+
+    public function getArecevoir(): ?float
+    {
+        return $this->Arecevoir;
+    }
+
+    public function setArecevoir(?float $Arecevoir): self
+    {
+        $this->Arecevoir = $Arecevoir;
 
         return $this;
     }
