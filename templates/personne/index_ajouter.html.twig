@@ -11,11 +11,12 @@
             <th>Prenom</th>
             <th>Montant</th>
             <th>Part</th>
-            <th>Prix à payer</th>
-            <th>Prix à recevoir</th>
+            <th>Montant à payer</th>
+            <th>Montant à recevoir</th>
             <th>Modifier</th>
             <th>Supprimer</th>
         </tr>
+
 
         {% for p in personne %}
             <tr>
@@ -23,8 +24,16 @@
                 <td>{{ p.Prenom }}</td>
                 <td>{{ p.Montant }} €</td>
                 <td>{{ p.Part }}</td>
-                <td>{{ p.apayer }}</td>
-                <td>{{ p.arecevoir }}</td>
+                <td class="text-danger"> {{ p.apayer }}
+                    {% if  p.apayer  != null  %}
+                        €
+                    {% endif %}
+                    </td>
+                <td class="text-success">{{ p.arecevoir }}
+                    {% if  p.arecevoir  != null  %}
+                        €
+                    {% endif %}
+                </td>
                 <td><a class="btn btn-warning" href="{{ path('modifier_personne', {"id":p.id, "idSoiree":soiree.id}) }}" >Modification</a></td>
                 <td><a class="btn btn-danger" href="{{ path('supprimer_personne', {"id":p.id, "idSoiree":soiree.id}) }}" >Supprimer</a></td>
             </tr>
