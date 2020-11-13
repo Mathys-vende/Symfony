@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Projet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 /**
  * @method Projet|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,18 @@ class ProjetRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findAllOrdered()
+    {
+        $dql = 'SELECT montant FROM ("App\Entity\Projet")  ';
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        $statement = $em->getConnection()->prepare($RAW_QUERY);
+        // Set parameters
+        $statement->bindValue('status', 1);
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+        return $query->execute();
+    }
+
 }

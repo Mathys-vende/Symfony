@@ -15,17 +15,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AjoutPersonneType extends AbstractType
+class PersonneSupprimerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
-            ->add('Nom')
-            ->add('Prenom')
-            ->add('montant', MoneyType::class)
-            ->add('Part', IntegerType::class, array('data' => 1))
-            ->add("ok", SubmitType::class, ["label"=>"Enregistrer"])
+            ->add("ok", SubmitType::class, ["label"=>"Supprimer"])
         ;
     }
 

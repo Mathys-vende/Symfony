@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer une personne{% endblock %}
+
+{% block body %}
+    <h1>Supprimer {{ personne.Nom }} {{ personne.Prenom }}</h1>
+    <h1>De la soirée : {{ soiree.Nom }}</h1>
+
+
+    <h2>Etes vous sur de vouloir supprimer ? </h2>
+
+    {{ form(formulaire) }}
+
+    <a class="btn btn-danger" href="{{ path("ajouter_personne", {"idSoiree":soiree.id}) }}"> retour aux détails de la soirée {{ soiree.Nom }}</a>
+{% endblock %}

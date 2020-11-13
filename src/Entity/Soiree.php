@@ -29,6 +29,7 @@ class Soiree
      */
     private $idProjet;
 
+
     public function __construct()
     {
         $this->idProjet = new ArrayCollection();

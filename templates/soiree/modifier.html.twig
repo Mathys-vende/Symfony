@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une soirée{% endblock %}
+{% block title %}Modifier une soirée{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une soirée</h1>
+    <h1>Modification de la soirée {{soiree.Nom}}</h1>
     {{ form(formulaire) }}
 
     <a class="btn btn-danger" href="{{ path("home_soiree") }}"> retour à la liste des soirées</a>
