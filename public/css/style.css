@@ -1,0 +1,17 @@
+.Title{
+    display: flex;
+    color: cornflowerblue;
+    justify-content: center;
+}
+
+body{
+    display: block;
+    margin: 8px;
+}
+.recevoir {
+    color: green;
+
+}
+.payer{
+    color: red;
+}
